@@ -1,0 +1,22 @@
+{
+  "name": "alexbklnv/php-dadata",
+  "description": "DaData API Client",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexey Baklanov",
+      "email": "alexbklnv@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": "^7.4 | ^8.0",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpDaData\\": "src/"
+    }
+  }
+}
