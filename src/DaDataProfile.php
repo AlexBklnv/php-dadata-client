@@ -29,7 +29,7 @@ class DaDataProfile
      * @throws \PhpDadata\Exceptions\DaDataRequestException
      * @link https://dadata.ru/api/version/
      */
-    public function relevance(): array
+    public function getRelevance(): array
     {
         return $this->client->get(ProfileMethodsEnum::RELEVANCE);
     }
@@ -44,7 +44,7 @@ class DaDataProfile
      * @throws \PhpDadata\Exceptions\DaDataRequestException
      * @link https://dadata.ru/api/stat/
      */
-    public function stat(?string $date = null): array
+    public function getStat(?string $date = null): array
     {
         if (!$date) {
             $date = (new DateTime())->format("Y-m-d");
@@ -58,10 +58,10 @@ class DaDataProfile
      *
      * @return array
      * @throws \PhpDadata\Exceptions\DaDataRequestException
-     * @link https://dadata.ru/api/stat/
+     * @link https://dadata.ru/api/balance/
      */
-    public function balance(): array
+    public function getBalance(): array
     {
-        return $this->client->get(ProfileMethodsEnum::USER_STATISTIC);
+        return $this->client->get(ProfileMethodsEnum::BALANCE);
     }
 }
