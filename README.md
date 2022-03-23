@@ -1,9 +1,8 @@
 ## Клиент для работы с API DaData
-![Packagist Version](https://img.shields.io/packagist/v/alexbklnv/php-dadata-client?color=blue&label=version)
+![Packagist Version](https://img.shields.io/packagist/v/alexbklnv/php-dadata-client?color=blue)
 ![License](https://img.shields.io/github/license/alexbklnv/php-dadata-client)
 ![Packagist Downloads](https://img.shields.io/packagist/dm/alexbklnv/php-dadata-client)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/alexbklnv/php-dadata-client)
-
 
 ## :scroll: **Installation**
 Установка пакета через composer:
