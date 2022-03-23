@@ -1,5 +1,5 @@
 {
-  "name": "alexbklnv/php-dadata",
+  "name": "alexbklnv/php-dadata-client",
   "description": "DaData API Client",
   "minimum-stability": "dev",
   "license": "MIT",
