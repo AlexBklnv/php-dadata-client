@@ -40,6 +40,7 @@ final class Client
      *
      * @return array
      * @throws DaDataRequestException
+     * @throws \JsonException
      */
     public function get(string $url, array $query = []): array
     {
@@ -55,16 +56,18 @@ final class Client
      *
      * @return array
      * @throws DaDataRequestException
+     * @throws \JsonException
      */
     public function post(string $url, ?array $data): array
     {
-        return $this->call($url, $data);
+        return $this->call($url, ['body' => $data]);
     }
     
     /**
      * @throws DaDataRequestException
+     * @throws \JsonException
      */
-    private function call(string $url, ?array $options = null)
+    private function call(string $url, ?array $options = null): array
     {
         $curl = curl_init($url);
         if (!$curl) {
@@ -74,11 +77,11 @@ final class Client
         $headers = [
             'Content-Type: application/json',
             'Accept: application/json',
-            'Authorization' => "Token {$this->token}",
+            "Authorization: Token {$this->token}",
         ];
         
         if (!empty($this->secret)) {
-            $headers["X-Secret"] = $this->secret;
+            $headers[] = "X-Secret: {$this->secret}";
         }
         
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -87,23 +90,20 @@ final class Client
         
         if (isset($options['body'])) {
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($options['body']));
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($options['body'], JSON_THROW_ON_ERROR));
         }
         
         $result = curl_exec($curl);
+        $httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+        
+        $result = json_decode((string)$result, true, 512, JSON_THROW_ON_ERROR);
+        
         if (empty($result)) {
             throw new RuntimeException('Empty result');
         }
         
-        $result = json_decode((string)$result, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException('Error parsing response: ' . json_last_error_msg());
-        }
-        
-        $httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $this->ensureRequestWithoutErrorByStatusCode($httpStatus, $result);
-        
-        curl_close($curl);
         
         return $result;
     }
@@ -111,16 +111,22 @@ final class Client
     /**
      * Обработка возвращаемых кодов, что результат без ошибок
      *
+     * @param null|array  $result  Результат запрос
      * @param int  $status  Статус код запроса
-     * @param array  $result  Результат запрос
      *
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @return void
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
      */
-    private function ensureRequestWithoutErrorByStatusCode(int $status, array $result): void
+    private function ensureRequestWithoutErrorByStatusCode(int $status, ?array $result = null): void
     {
+        if ($status === 200) {
+            return;
+        }
+        if (isset($result['message'])) {
+            throw new DaDataRequestException($result['message'], $status);
+        }
+        
         switch ($status) {
-            case 200:
-                return;
             case 400:
                 throw new RuntimeException('Incorrect request (invalid JSON or XML)');
             case 401:
@@ -135,8 +141,8 @@ final class Client
                 throw new RuntimeException('Too many requests per second or new connections per minute');
             case 500:
                 throw new RuntimeException('Server internal error');
-            default:
-                throw new DaDataRequestException($result['message'] ?? 'Unexpected error', $status);
         }
+        
+        throw new DaDataRequestException($result['message'] ?? 'Unexpected error', $status);
     }
 }
