@@ -2,7 +2,7 @@
   "name": "alexbklnv/php-dadata-client",
   "prefer-stable": true,
   "description": "DaData API Client",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "MIT",
   "type": "library",
   "keywords": [
