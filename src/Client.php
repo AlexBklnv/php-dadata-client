@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpDaData;
 
-use PhpDadata\Exceptions\DaDataRequestException;
+use PhpDaData\Exceptions\DaDataRequestException;
 use RuntimeException;
 
 /**

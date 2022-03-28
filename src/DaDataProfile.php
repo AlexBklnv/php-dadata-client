@@ -26,7 +26,8 @@ class DaDataProfile
      * Возвращает даты актуальности справочников (ФИАС, ЕГРЮЛ, банки и другие).
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/version/
      */
     public function getRelevance(): array
@@ -41,7 +42,8 @@ class DaDataProfile
      * @param null|string  $date  Дата формата Y-m-d
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/stat/
      */
     public function getStat(?string $date = null): array
@@ -57,7 +59,8 @@ class DaDataProfile
      * Возвращает текущий баланс вашего счета.
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/balance/
      */
     public function getBalance(): array
