@@ -1,6 +1,5 @@
 {
   "name": "alexbklnv/php-dadata-client",
-  "version": "0.1.2",
   "prefer-stable": true,
   "description": "DaData API Client",
   "minimum-stability": "dev",
