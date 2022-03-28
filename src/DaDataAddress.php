@@ -33,7 +33,8 @@ final class DaDataAddress
      * @param string  $address  Адрес
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/clean/address/
      */
     public function cleanAddress(string $address): array
@@ -50,7 +51,8 @@ final class DaDataAddress
      * @param int  $count  Количество результатов (максимум — 20)
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/suggest/address/
      */
     public function suggestAddress(string $address, int $count = 10): array
@@ -65,7 +67,8 @@ final class DaDataAddress
      * @param string  $address  Адрес
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/geocode/
      */
     public function geocodeAddress(string $address): array
@@ -83,7 +86,8 @@ final class DaDataAddress
      * @param int  $count  Количество результатов (максимум — 20)
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/geolocate/
      */
     public function geolocate(string $lat, string $lon, int $radiusMeters = 100, int $count = 10): array
@@ -100,7 +104,8 @@ final class DaDataAddress
      * @param string  $ip
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/iplocate/
      */
     public function iplocate(string $ip): array
@@ -115,7 +120,8 @@ final class DaDataAddress
      * @param int  $count  Количество результатов (максимум — 20)
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/find-address/
      */
     public function findByCode(string $code, int $count = 10): array
@@ -131,7 +137,8 @@ final class DaDataAddress
      * @param int  $count  Количество результатов (максимум — 20)
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/cadastre/
      */
     public function findByCadastre(string $code, int $count = 10): array
@@ -145,7 +152,8 @@ final class DaDataAddress
      * @param string  $address
      *
      * @return array
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/suggest/postal_unit/
      */
     public function findPostUnit(string $address): array
@@ -161,7 +169,8 @@ final class DaDataAddress
      *
      * @return array
      *
-     * @throws \PhpDadata\Exceptions\DaDataRequestException
+     * @throws \PhpDaData\Exceptions\DaDataRequestException
+     * @throws \JsonException
      * @link https://dadata.ru/api/suggest/country/
      */
     public function suggestCountry(string $country): array
