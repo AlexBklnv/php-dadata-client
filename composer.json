@@ -5,6 +5,14 @@
   "description": "DaData API Client",
   "minimum-stability": "dev",
   "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "alexbklnv",
+    "dadata",
+    "php",
+    "address",
+    "profile"
+  ],
   "authors": [
     {
       "name": "Alexey Baklanov",
@@ -20,5 +28,13 @@
     "psr-4": {
       "PhpDaData\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
   }
 }
